@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { textToImage } from "../lib/textToImage";
 
 const execute = async (
   interaction: ChatInputCommandInteraction,
@@ -6,9 +7,10 @@ const execute = async (
 ) => {
   const { id } = interaction;
   interaction.deferReply();
+  const img = await textToImage(query);
 
   console.log("interaction id: ", id);
-  interaction.followUp(`Oh you wanna see a picture of a ${query}?`);
+  interaction.followUp(`Oh you wanna see a picture of a ${query}?\n${img}`);
 };
 
 module.exports = {
